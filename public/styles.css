@@ -1,0 +1,178 @@
+:root {
+    --primary-color: #4e73df;
+    --secondary-color: #f8f9fc;
+    --accent-color: #2e59d9;
+    --text-color: #5a5c69;
+    --overlay-color: rgba(138, 164, 241, 0);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/fondo2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    filter: brightness(0.7);
+}
+
+.content-overlay {
+    position: relative;
+    background-color: var(--overlay-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-container {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    flex: 1;
+}
+
+.app-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.25);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    background-color: white;
+}
+
+.app-card:hover {
+    transform: translateY(-5px);
+}
+
+.app-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.app-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.app-body {
+    padding: 2rem;
+    background-color: white;
+    position: relative;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.form-control {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d3e2;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+.result-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--secondary-color);
+    transition: all 0.5s ease;
+}
+
+.emotion-display {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.loading-spinner {
+    display: none;
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto;
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    display: none;
+    object-fit: contain;
+}
+
+.features-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.features-list li {
+    padding: 0.5rem 0;
+}
+
+.features-list li i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    background-color: var(--overlay-color);
+    position: relative;
+}
+
+#default-message {
+    padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .app-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .app-body {
+        padding: 1.5rem;
+    }
+    
+    .features-list li {
+        font-size: 0.9rem;
+    }
+}
