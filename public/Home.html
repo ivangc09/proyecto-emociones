@@ -95,7 +95,7 @@
         resultDiv.innerHTML = `<div class="text-center py-3"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Analizando expresión facial...</p></div>`;
 
         try {
-            let response = await fetch("http://127.0.0.1:8000/predict-emotion/", {
+            let response = await fetch("https://emotion-detector-backend.onrender.com/predict-emotion/", {
             method: "POST",
             body: formData
             });
@@ -154,7 +154,7 @@
             const formData = new FormData();
             formData.append("file", blob, "frame.jpg");
 
-            fetch("http://127.0.0.1:8000/predict-emotion/", {
+            fetch("https://emotion-detector-backend.onrender.com/predict-emotion/", {
                 method: "POST",
                 body: formData
             })

@@ -10,7 +10,7 @@ app.use(cors());
 require('dotenv').config();
 
 admin.initializeApp({
-    credential: admin.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS),
+    credential: admin.credential.cert(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)),
 });
 
 // Middleware para verificar el token de Firebase
