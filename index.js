@@ -1,49 +1,37 @@
 const express = require('express');
-const admin = require('firebase-admin');
-const cors = require('cors');
 const path = require('path');
-
-var app = express();
-
-app.use(express.json());
-app.use(cors());
-
+const cors = require('cors');
+const admin = require('firebase-admin');
 require('dotenv').config();
 
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Firebase init
 admin.initializeApp({
-    credential: admin.credential.cert(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)),
+  credential: admin.credential.cert(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS))
 });
 
-// Middleware para verificar el token de Firebase
-const verifyToken = async (req, res, next) => {
-    const token = req.headers.authorization?.split("Bearer ")[1];
-
-    if (!token) {
-        return res.status(401).json({ message: "No token provided" });
-    }
-
-    try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        req.user = decodedToken;
-        next();
-    } catch (error) {
-        return res.status(401).json({ message: "Invalid token" });
-    }
-};
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.send('Hola Mundo desde Express en Render!');
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Ruta protegida
-app.post("/protected", verifyToken, (req, res) => {
-    res.json({ message: "Ruta protegida", user: req.user });
-});
+app.post('/protected', async (req, res) => {
+  const token = req.headers.authorization?.split('Bearer ')[1];
+  if (!token) return res.status(401).json({ message: "No token provided" });
 
-app.use(express.static('public'));
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    res.json({ message: "Ruta protegida", user: decodedToken });
+  } catch (err) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+});
 
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+  console.log(`Servidor en puerto ${port}`);
 });
