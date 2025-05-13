@@ -105,7 +105,7 @@
                     console.log("Token:", token);
 
                     // Enviar el token al backend
-                    fetch("http://localhost:3000/protected", {
+                    fetch("/protected", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
