@@ -1,6 +1,7 @@
 const express = require('express');
 const admin = require('firebase-admin');
 const cors = require('cors');
+const path = require('path');
 
 var app = express();
 
@@ -30,13 +31,19 @@ const verifyToken = async (req, res, next) => {
     }
 };
 
+app.get('/', (req, res) => {
+    res.send('Hola Mundo desde Express en Render!');
+});
+
+// Ruta protegida
 app.post("/protected", verifyToken, (req, res) => {
     res.json({ message: "Ruta protegida", user: req.user });
 });
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
-});
-
 app.use(express.static('public'));
 
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
